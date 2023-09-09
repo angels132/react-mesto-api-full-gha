@@ -1,50 +1,35 @@
-const BASE_URL = 'https://api.mikuname.students.nomoredomainsicu.ru';
+const BASE_URL = "https://auth.nomoreparties.co";
 
 function checkResponse(res) {
   if (res.ok) {
     return res.json();
   } else {
-    Promise.reject(`Ошибка: ${res.status}/${res.statusText}`);
-  };
-};
+    return Promise.reject(`Ошибка ${res.status}`);
+  }
+}
 
-export function registerUser(email, password) {
+export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ email, password })
-  })
-    .then(res => checkResponse(res));
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ password, email }),
+  }).then(checkResponse);
 };
 
-export function authorizeUser(email, password) {
+export const authorize = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ email, password })
-  })
-    .then(res => checkResponse(res))
-    .then((data) => {
-      if (data.token) {
-        const { token } = data;
-        localStorage.setItem('jwt', token);
-
-        return token;
-      };
-    })
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ password, email }),
+  }).then(checkResponse);
 };
 
-export function getContent(token) {
+export const tokenCheck = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    }
-  })
-    .then(res => checkResponse(res))
-    .then(data => data)
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(checkResponse);
 };

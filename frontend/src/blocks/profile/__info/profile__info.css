@@ -1,21 +1,12 @@
 .profile__info {
-  padding-left: 30px;
-  max-width: 366px;
-  grid-area: info;
-  display: grid;
-  align-self: center;
-  row-gap: 11px;
-  column-gap: 18px;
-  grid-template-areas:
-    'title edit-button'
-    'subtitle subtitle';
+  max-width: 75%;
+  position: relative;
 }
 
-@media screen and (max-width: 800px) {
+
+@media screen and (max-width: 900px) {
   .profile__info {
-    padding-top: 22.25px;
-    text-align: center;
-    padding-left: 0;
-    column-gap: 0;
+    margin-top: 1rem;
+    max-width: 90%;
   }
 }

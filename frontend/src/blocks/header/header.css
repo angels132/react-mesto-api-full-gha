@@ -1,21 +1,20 @@
+@import url(__logo/header__logo.css);
+@import url(__link/header__link.css);
+@import url(__link/_type/header__link_type_email.css);
+@import url(__link/_type/header__link_type_exit.css);
+@import url(__menu/header__menu.css);
+
 .header {
+  margin: 0 auto;
   padding-top: 45px;
-  padding-bottom: 40px;
+  max-width: 882px;
   border-bottom: 1px solid rgba(84, 84, 84, .7);
   display: flex;
   justify-content: space-between;
 }
 
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 475px) {
   .header {
-    padding-top: calc(28px + (17 + 17 * .7) * (100vw - 320px) / 1279);
-    padding-bottom: calc(30px + (10 + 10 * .7) * (100vw - 320px) / 1279);
-  }
-}
-
-@media screen and (max-width: 696px) {
-  .header {
-    padding-left: calc(30px + (11.813 + 11.813 * .7) * (100vw - 320px) / 696);
-    padding-right: calc(30px + (11.813 + 11.813 * .7) * (100vw - 320px) / 696);
+    padding-top: 28px;
   }
 }

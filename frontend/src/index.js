@@ -1,20 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-
+import ReactDOM from 'react-dom';
 import './index.css';
-
+import App from './components/App';
+import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
-import App from './components/App/App.js';
 
-import reportWebVitals from './reportWebVitals';
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
 
-reportWebVitals();
+serviceWorker.unregister();
