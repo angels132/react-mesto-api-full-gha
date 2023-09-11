@@ -15,7 +15,7 @@ class Api {
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
     }).then(this._checkResponse);
   }
@@ -23,7 +23,7 @@ class Api {
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
     }).then(this._checkResponse);
   }
@@ -65,7 +65,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
     }).then(this._checkResponse);
   }
@@ -74,7 +74,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "PUT",
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
     }).then(this._checkResponse);
   }
@@ -83,14 +83,14 @@ class Api {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "DELETE",
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
     }).then(this._checkResponse);
   }
 }
 
 const api = new Api({
-  baseUrl: "https://api.mikuname.students.nomoredomainsicu.ru",
+  baseUrl: "https://api.mikuname.students.nomoredomainsicu.ru/",
 });
 
 export default api;

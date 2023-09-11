@@ -1,4 +1,4 @@
-const BASE_URL = "https://api.mikuname.students.nomoredomainsicu.ru";
+const BASE_URL = "https://api.mikuname.students.nomoredomainsicu.ru/";
 
 function checkResponse(res) {
   if (res.ok) {
@@ -29,7 +29,8 @@ export const tokenCheck = (token) => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
   }).then(checkResponse);
 };
+
