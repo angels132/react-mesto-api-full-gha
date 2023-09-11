@@ -15,7 +15,7 @@ class Api {
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: {
-        authorization: this._headers.authorization,
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
       },
     }).then(this._checkResponse);
   }
@@ -23,7 +23,7 @@ class Api {
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: {
-        authorization: this._headers.authorization,
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
       },
     }).then(this._checkResponse);
   }
@@ -65,7 +65,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: {
-        authorization: this._headers.authorization,
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
       },
     }).then(this._checkResponse);
   }
@@ -74,7 +74,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "PUT",
       headers: {
-        authorization: this._headers.authorization,
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
       },
     }).then(this._checkResponse);
   }
@@ -83,7 +83,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "DELETE",
       headers: {
-        authorization: this._headers.authorization,
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
       },
     }).then(this._checkResponse);
   }
@@ -91,10 +91,6 @@ class Api {
 
 const api = new Api({
   baseUrl: "https://api.mikuname.students.nomoredomainsicu.ru",
-  headers: {
-    authorization: "43bc2f0f-65e6-40f5-a20b-329dc405ffe8",
-    "Content-Type": "application/json",
-  },
 });
 
 export default api;
