@@ -92,7 +92,7 @@ class Api {
 const api = new Api({
   baseUrl: "https://api.mikuname.students.nomoredomainsicu.ru",
   headers: {
-    authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    authorization: "43bc2f0f-65e6-40f5-a20b-329dc405ffe8",
     "Content-Type": "application/json",
   },
 });
