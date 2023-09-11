@@ -15,15 +15,15 @@ class Api {
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: {
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     }).then(this._checkResponse);
   }
-
+ 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: {
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     }).then(this._checkResponse);
   }
@@ -65,7 +65,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: {
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     }).then(this._checkResponse);
   }
@@ -74,7 +74,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "PUT",
       headers: {
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     }).then(this._checkResponse);
   }
@@ -83,7 +83,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "DELETE",
       headers: {
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     }).then(this._checkResponse);
   }
