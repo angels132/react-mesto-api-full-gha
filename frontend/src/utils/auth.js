@@ -1,4 +1,4 @@
-const BASE_URL = "https://api.mikuname.students.nomoredomainsicu.ru/";
+const BASE_URL = "https://api.mikuname.students.nomoredomainsicu.ru";
 
 function checkResponse(res) {
   if (res.ok) {
@@ -33,5 +33,3 @@ export const tokenCheck = (token) => {
     },
   }).then(checkResponse);
 };
-
-
