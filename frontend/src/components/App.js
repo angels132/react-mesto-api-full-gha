@@ -18,6 +18,7 @@ import successImage from '../images/success.svg';
 import failureImage from '../images/fail.svg';
 import * as auth from '../utils/auth';
 
+
 function App() {
   const [isEditProfilePopupOpen, setProfilePopupOpened] = React.useState(false);
   const [isAddPlacePopupOpen, setPlacePopupOpened] = React.useState(false);
@@ -35,11 +36,13 @@ function App() {
 
   // установка состояния авторизации пользователя
   const [loggedIn, setLoggedIn] = React.useState(false);
-
+  
   const history = useHistory();
+
 
   // получение данных о пользователе и массиве карточек при монтировании компонента
   React.useEffect(() => {
+    if (loggedIn)
     Promise.all([projectApi.getUserInfo(), projectApi.getInitialCards()])
       .then(([userInfo, cardsArr]) => {
         setCurrentUser(userInfo);
@@ -49,26 +52,43 @@ function App() {
         console.log(`Ошибка ${err}`);
         alert('Ошибка подключения к серверу.')
       })
-  }, [])
+  }, [loggedIn])
+  
+  // React.useEffect(() => {
+  //   auth.tokenCheck(localStorage.getItem('token'))
+  //     .then(result => {
+  //       if (result) {
+  //         setUserEmail(result.data.email);
+  //         setLoggedIn(true);
+  //         history.push('/');
+  //         setCurrentPath('/');
+  //       }
+  //       else {
+  //         throw new Error('Ошибка текущего сеанса пользователя. Необходимо заново авторизироваться')
+  //       }
+  //     })
+  //     .catch (err => {
+  //       console.log(`Ошибка входа по токену ${err}`);
+  //       navigate('/');
+  //     })
+  // }, [])
+
 
   React.useEffect(() => {
-    auth.tokenCheck(localStorage.getItem('token'))
-      .then(result => {
-        if (result) {
-          setUserEmail(result.data.email);
-          setLoggedIn(true);
-          history.push('/');
-          setCurrentPath('/');
-        }
-        else {
-          throw new Error('Ошибка текущего сеанса пользователя. Необходимо заново авторизироваться')
-        }
-      })
-      .catch (err => {
-        console.log(`Ошибка входа по токену ${err}`);
-        history.push('/sign-in');
-      })
-  }, [])
+    const token = localStorage.getItem('token')
+    if (token) { 
+    auth.tokenCheck(token)
+    .then((res) => {
+      setLoggedIn(true);
+      history.push('/');
+      // navigate('/');
+      setUserEmail(res.email);
+    })
+     .catch (err => {
+      console.log(`Ошибка входа по токену ${err}`);
+    })
+    }}, [])
+  
 
   const handleEditProfileClick = () => {
     setProfilePopupOpened(true)
@@ -194,10 +214,11 @@ function App() {
     auth.register(email, password)
       .then(result => {
         if (result) {
-          setUserEmail(result.data.email);
+          setUserEmail(result.email);
           setInfoTooltipOpened({ opened: true, success: true })
           setLoggedIn(true);
           history.push('/');
+          // navigate('/');
           setCurrentPath('/');
         }
         else {
@@ -219,6 +240,7 @@ function App() {
           setUserEmail(email);
           setLoggedIn(true);
           history.push('/');
+          // navigate('/');
           setCurrentPath('/');
         }
         else {
@@ -236,6 +258,7 @@ function App() {
     setUserEmail('');
     setLoggedIn(false);
     history.push('/sign-in');
+    // navigate('/sign-in');
     setCurrentPath('/sign-in');
   }
 

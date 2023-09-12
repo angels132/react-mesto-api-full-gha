@@ -15,6 +15,7 @@ class Api {
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: {
+        "Content-Type": "application/json",
         authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     }).then(this._checkResponse);
@@ -23,6 +24,7 @@ class Api {
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: {
+        "Content-Type": "application/json",
         authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     }).then(this._checkResponse);
@@ -32,8 +34,8 @@ class Api {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: {
-        ...this._headers,
         "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem('token')}`,
       },
       body: JSON.stringify({ name, about }),
     }).then(this._checkResponse);
@@ -43,8 +45,8 @@ class Api {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: {
-        ...this._headers,
         "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem('token')}`,
       },
       body: JSON.stringify({ avatar }),
     }).then(this._checkResponse);
@@ -54,8 +56,8 @@ class Api {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: {
-        ...this._headers,
         "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem('token')}`,
       },
       body: JSON.stringify({ name, link }),
     }).then(this._checkResponse);
@@ -65,6 +67,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: {
+        "Content-Type": "application/json",
         authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     }).then(this._checkResponse);
@@ -74,6 +77,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "PUT",
       headers: {
+        "Content-Type": "application/json",
         authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     }).then(this._checkResponse);
@@ -83,6 +87,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "DELETE",
       headers: {
+        "Content-Type": "application/json",
         authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     }).then(this._checkResponse);

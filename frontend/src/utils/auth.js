@@ -29,7 +29,7 @@ export const tokenCheck = (token) => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      authorization: `Bearer ${localStorage.getItem('token')}`,
     },
   }).then(checkResponse);
 };

@@ -19,28 +19,28 @@ const limiter = rateLimit({
 
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
   useNewUrlParser: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
-  useUnifiedTopology: true,
-  autoIndex: true,
+  // useCreateIndex: true,
+  // useFindAndModify: false,
+  // useUnifiedTopology: true,
+  // autoIndex: true,
 });
 
 const app = express();
 
 app.use(cors());
-
-app.use(helmet());
-app.use(limiter);
-
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
 
-app.use(bodyParser.json());
 
 app.use(requestLogger);
+app.use(limiter);
+app.use(helmet());
+
+app.use(bodyParser.json());
+
 app.use(router);
 app.use(errorLogger);
 
