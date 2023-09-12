@@ -24,7 +24,7 @@ export const authorize = (email, password) => {
   }).then(checkResponse);
 };
 
-export const tokenCheck = () => {
+export function tokenCheck() {
   const token = localStorage.getItem('token');
   if (!token) {
     return Promise.reject('Токен не найден');

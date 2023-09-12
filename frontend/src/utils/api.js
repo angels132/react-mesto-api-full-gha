@@ -18,7 +18,7 @@ class Api {
       method: 'GET',
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     }).then(this._checkResponse);
   }
@@ -28,7 +28,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards`, {
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     }).then(this._checkResponse);
   }

@@ -202,7 +202,7 @@ function App() {
         if (result) {
           setUserEmail(result.email);
           setInfoTooltipOpened({ opened: true, success: true });
-          setLoggedIn(true);
+          // setLoggedIn(true);
           history.push("/sign-in");
           setCurrentPath("/sign-in");
         } else {
@@ -240,6 +240,7 @@ function App() {
   //Обработчик завершения сеанса
   const handleLogout = () => {
     localStorage.removeItem("token");
+    setCurrentUser({});
     setUserEmail("");
     setLoggedIn(false);
     history.push("/sign-in");
