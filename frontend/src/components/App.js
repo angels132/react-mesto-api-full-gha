@@ -46,26 +46,12 @@ function App() {
 
   const history = useHistory();
 
-  // получение данных о пользователе и массиве карточек при монтировании компонента
-  React.useEffect(() => {
-    if (loggedIn)
-      Promise.all([projectApi.getUserInfo(), projectApi.getInitialCards()])
-        .then(([userInfo, cardsArr]) => {
-          setCurrentUser(userInfo);
-          // setCards(cardsArr);
-        })
-        .catch((err) => {
-          console.log(`Ошибка ${err}`);
-          alert("Ошибка подключения к серверу.");
-        });
-  }, [loggedIn]);
-
   React.useEffect(() => {
     auth
       .tokenCheck(localStorage.getItem("token"))
       .then((result) => {
         if (result) {
-          setUserEmail(result.data.email);
+          setUserEmail(result.email);
           setLoggedIn(true);
           history.push("/");
           setCurrentPath('/');
@@ -77,24 +63,8 @@ function App() {
       })
       .catch((err) => {
         console.log(`Ошибка входа по токену ${err}`);
-        // navigate('/');
       });
   }, []);
-
-  // React.useEffect(() => {
-  //   const token = localStorage.getItem('token')
-  //   if (token) {
-  //   auth.tokenCheck(token)
-  //   .then((res) => {
-  //     setLoggedIn(true);
-  //     history.push('/');
-  //     // navigate('/');
-  //     setUserEmail(res.email);
-  //   })
-  //    .catch (err => {
-  //     console.log(`Ошибка входа по токену ${err}`);
-  //   })
-  //   }}, [])
 
   const handleEditProfileClick = () => {
     setProfilePopupOpened(true);
@@ -149,7 +119,7 @@ function App() {
 
   //Обработчик нажатия кнопки "like"
   const handleCardLike = (card) => {
-    if (card.likes.some((x) => x._id === currentUser._id))
+    if (card.likes.some((_id) => _id === currentUser._id))
       projectApi
         .deleteLike(card._id)
         .then((newCard) => replaceCard(newCard))
@@ -172,8 +142,7 @@ function App() {
     projectApi
       .deleteCard(card._id)
       .then(() => {
-        const newCards = cards.filter((x) => x._id !== card._id);
-        setCards(newCards);
+        setCards((prevState) => prevState.filter((data) => data._id !== card._id));
         setAgreementPopupOpened(false);
       })
       .catch((err) => {
@@ -216,7 +185,7 @@ function App() {
     projectApi
       .addCard(name, link)
       .then((card) => {
-        setCards([card, ...cards]);
+        setCards((cards) => [card, ...cards]);
         setPlacePopupOpened(false);
       })
       .catch((err) => {
@@ -234,9 +203,8 @@ function App() {
           setUserEmail(result.email);
           setInfoTooltipOpened({ opened: true, success: true });
           setLoggedIn(true);
-          history.push("/");
-          // navigate('/');
-          setCurrentPath("/");
+          history.push("/sign-in");
+          setCurrentPath("/sign-in");
         } else {
           throw new Error("Не удалось завершить регистрацию");
         }
@@ -257,7 +225,6 @@ function App() {
           setUserEmail(email);
           setLoggedIn(true);
           history.push("/");
-          // navigate('/');
           setCurrentPath("/");
         } else {
           throw new Error("Не удалось получить токен от сервера");
@@ -276,9 +243,21 @@ function App() {
     setUserEmail("");
     setLoggedIn(false);
     history.push("/sign-in");
-    // navigate('/sign-in');
     setCurrentPath("/sign-in");
   };
+
+  // получение данных о пользователе и массиве карточек при монтировании компонента
+  React.useEffect(() => {
+    if (loggedIn)
+      Promise.all([projectApi.getUserInfo(), projectApi.getInitialCards()])
+        .then(([userInfo, cardsArr]) => {
+          setCurrentUser(userInfo);
+          setCards(cardsArr);
+        })
+        .catch((err) => {
+          console.log(`Ошибка ${err}`);
+        });
+  }, [loggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

@@ -10,7 +10,7 @@ const Card = React.memo((props) => {
   const handleDeleteCard = () => props.onDeleteCardClick(props.card);
 
   const currentUser = React.useContext(CurrentUserContext);
-  const didUserLiked = props.card.likes.some(x => x._id === currentUser._id);
+  const didUserLiked = props.card.likes.some(_id => _id === currentUser._id);
 
   return (
     <figure className="card">
@@ -28,7 +28,7 @@ const Card = React.memo((props) => {
             'card__like-button_checked' : ''}`} type="button" onClick={hadleCardLike}/>
           <span className="card__likes-counter">{props.card.likes.length}</span>
         </div>
-        <button className={`default-button card__delete-button ${currentUser._id === props.card.owner._id ?
+        <button className={`default-button card__delete-button ${currentUser._id === props.card.owner ?
           '' : 'card__delete-button_hidden'}`} type="button" onClick={handleDeleteCard}/>
       </figcaption>
     </figure>
