@@ -16,7 +16,6 @@ class Api {
     const token = localStorage.getItem('token');
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
-      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
         authorization: `Bearer ${token}`,
@@ -27,7 +26,6 @@ class Api {
   getInitialCards() {
     const token = localStorage.getItem('token');
     return fetch(`${this._baseUrl}/cards`, {
-      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
         authorization: `Bearer ${token}`,
@@ -39,7 +37,6 @@ class Api {
     const token = localStorage.getItem('token');
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
-      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
         authorization: `Bearer ${token}`,
@@ -52,7 +49,6 @@ class Api {
     const token = localStorage.getItem('token');
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
-      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
         authorization: `Bearer ${token}`,
@@ -65,7 +61,6 @@ class Api {
     const token = localStorage.getItem('token');
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
-      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
         authorization: `Bearer ${token}`,
@@ -78,7 +73,6 @@ class Api {
     const token = localStorage.getItem('token');
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
-      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
         authorization: `Bearer ${token}`,
@@ -90,7 +84,6 @@ class Api {
     const token = localStorage.getItem('token');
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
-      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
         authorization: `Bearer ${token}`,
@@ -102,7 +95,6 @@ class Api {
     const token = localStorage.getItem('token');
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
-      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
         authorization: `Bearer ${token}`,
