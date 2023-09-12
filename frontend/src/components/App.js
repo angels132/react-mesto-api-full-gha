@@ -62,7 +62,7 @@ function App() {
         }
       })
       .catch((err) => {
-        console.log(`Ошибка входа по токену ${err}`);
+        console.log(err);
       });
   }, []);
 
@@ -252,7 +252,7 @@ function App() {
       Promise.all([projectApi.getUserInfo(), projectApi.getInitialCards()])
         .then(([userInfo, cardsArr]) => {
           setCurrentUser(userInfo);
-          setCards(cardsArr);
+          setCards(cardsArr.reverse());
         })
         .catch((err) => {
           console.log(`Ошибка ${err}`);

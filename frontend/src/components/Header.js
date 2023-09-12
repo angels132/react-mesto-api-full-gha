@@ -6,7 +6,6 @@ function Header(props) {
   const newPath = props.path === '/' || props.path === '/sign-up' ? '/sign-in' : '/sign-up';
   const linkName = {'/': 'Выйти', '/sign-up': 'Войти', '/sign-in': 'Регистрация'}
   const handleLogout = () => {props.onLogout()};
-  console.log(props.path);
 
   return (
     <header className="header">
