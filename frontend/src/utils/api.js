@@ -1,7 +1,7 @@
 class Api {
-  constructor(baseUrl) {
+  constructor({baseUrl}) {
     this._baseUrl = baseUrl;
-    // this._headers = options.headers;
+    // this._headers = headers;
   }
 
   _checkResponse(res) {
@@ -62,7 +62,7 @@ class Api {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ name, link }),
     }).then(this._checkResponse);
@@ -102,8 +102,8 @@ class Api {
   }
 }
 
-const api = new Api({
-  baseUrl: "https://api.mikuname.students.nomoredomainsicu.ru",
+export const api = new Api({
+  baseUrl: 'http://api.mikuname.students.nomoredomainsicu.ru',
 });
 
 export default api;
