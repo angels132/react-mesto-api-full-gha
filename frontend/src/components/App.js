@@ -61,7 +61,7 @@ function App() {
           setUserEmail(result.data.email);
           setLoggedIn(true);
           history.push('/');
-          setCurrentPath('/');
+          // setCurrentPath('/');
         }
         else {
           throw new Error('Ошибка текущего сеанса пользователя. Необходимо заново авторизироваться')
