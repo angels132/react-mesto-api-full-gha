@@ -103,7 +103,7 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: 'http://api.mikuname.students.nomoredomainsicu.ru',
+  baseUrl: 'https://api.mikuname.students.nomoredomainsicu.ru',
 });
 
 export default api;
