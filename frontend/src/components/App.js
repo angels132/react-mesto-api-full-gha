@@ -46,7 +46,7 @@ function App() {
     Promise.all([projectApi.getUserInfo(), projectApi.getInitialCards()])
       .then(([userInfo, cardsArr]) => {
         setCurrentUser(userInfo);
-        setCards(cardsArr);
+        // setCards(cardsArr);
       })
       .catch(err => {
         console.log(`Ошибка ${err}`);
@@ -54,40 +54,40 @@ function App() {
       })
   }, [loggedIn])
   
-  // React.useEffect(() => {
-  //   auth.tokenCheck(localStorage.getItem('token'))
-  //     .then(result => {
-  //       if (result) {
-  //         setUserEmail(result.data.email);
-  //         setLoggedIn(true);
-  //         history.push('/');
-  //         setCurrentPath('/');
-  //       }
-  //       else {
-  //         throw new Error('Ошибка текущего сеанса пользователя. Необходимо заново авторизироваться')
-  //       }
-  //     })
-  //     .catch (err => {
-  //       console.log(`Ошибка входа по токену ${err}`);
-  //       navigate('/');
-  //     })
-  // }, [])
-
-
   React.useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (token) { 
-    auth.tokenCheck(token)
-    .then((res) => {
-      setLoggedIn(true);
-      history.push('/');
-      // navigate('/');
-      setUserEmail(res.email);
-    })
-     .catch (err => {
-      console.log(`Ошибка входа по токену ${err}`);
-    })
-    }}, [])
+    auth.tokenCheck(localStorage.getItem('token'))
+      .then(result => {
+        if (result) {
+          setUserEmail(result.data.email);
+          setLoggedIn(true);
+          history.push('/');
+          setCurrentPath('/');
+        }
+        else {
+          throw new Error('Ошибка текущего сеанса пользователя. Необходимо заново авторизироваться')
+        }
+      })
+      .catch (err => {
+        console.log(`Ошибка входа по токену ${err}`);
+        // navigate('/');
+      })
+  }, [])
+
+
+  // React.useEffect(() => {
+  //   const token = localStorage.getItem('token')
+  //   if (token) { 
+  //   auth.tokenCheck(token)
+  //   .then((res) => {
+  //     setLoggedIn(true);
+  //     history.push('/');
+  //     // navigate('/');
+  //     setUserEmail(res.email);
+  //   })
+  //    .catch (err => {
+  //     console.log(`Ошибка входа по токену ${err}`);
+  //   })
+  //   }}, [])
   
 
   const handleEditProfileClick = () => {

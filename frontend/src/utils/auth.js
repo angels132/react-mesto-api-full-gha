@@ -24,12 +24,13 @@ export const authorize = (email, password) => {
   }).then(checkResponse);
 };
 
-export const tokenCheck = (token) => {
+export const tokenCheck = () => {
+  const token = localStorage.getItem('token')
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${localStorage.getItem('token')}`,
+      authorization: `Bearer ${token}`,
     },
   }).then(checkResponse);
 };

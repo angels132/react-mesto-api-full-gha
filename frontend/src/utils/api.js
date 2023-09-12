@@ -53,11 +53,12 @@ class Api {
   }
 
   addCard(name, link) {
+    const token = localStorage.getItem('token')
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${localStorage.getItem('token')}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ name, link }),
     }).then(this._checkResponse);
